@@ -6,6 +6,7 @@ var questionHeader = document.querySelector("#questionHeader");
 var answerChoicesOl = document.querySelector("#answerChoices-ol");
 var correctAnswerdiv = document.querySelector("#correctAnswer-div");
 var quizQuestionsdiv = document.querySelector("#quizQuestions-div");
+var time = document.querySelector("#time");
 
 var timer = 75;
 var counter = 0;
@@ -113,23 +114,104 @@ var showAnswer = function(event, correctAnswer){
     {
         correctAnswerdiv.textContent = "Wrong!";
         correctAnswerdiv.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
+        timer = timer - 10;
+        updateTimer(timer);
     }
     que_Index++;
    // console.log("Queindex is "+que_Index);
     startQuiz();
 }
 
+// Update Timer for every wrong answer
+var updateTimer = function(timer){
+    time.textContent = timer;
 
-
+}
  
 
 // click the start-quiz button
 startQuizBtn.addEventListener("click", removeCodingChallengeInfoPage);
 
 
+
+// All Done Page loaded with DOM methods
 var allDone = function() {
     console.log("Entered All Done Page!");
+    var allDonediv = document.createElement("div");
+    allDonediv.setAttribute('style', 'text-align: center, margin-bottom: 20px, position: absolute, top: 40%, left: 50%;');
+    allDonediv.style.position = "absolute";
+    allDonediv.style.top = "30%";
+    allDonediv.style.left = "30%";
+
+    main.appendChild(allDonediv);
+
+    var allDoneh1 = document.createElement("h1");
+    allDoneh1.textContent = "All Done!";
+    allDoneh1.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
+    allDonediv.appendChild(allDoneh1);
+
+    var allDoneFinalScore = document.createElement("h2");
+    allDoneFinalScore.textContent = "Your final score is: " +timer + ".";
+    allDoneh1.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
+    allDonediv.appendChild(allDoneFinalScore);
+
+    //create enter initials div to hold 3 different elements
+    var enterInitialsdiv = document.createElement("div");
+    enterInitialsdiv.setAttribute('style', 'text-align: left;');
+    enterInitialsdiv.style.width = "100%"; 
+    
+    allDonediv.appendChild(enterInitialsdiv);
+
+    var allDoneEnterInitials = document.createElement("h2");
+    allDoneEnterInitials.textContent = "Enter Initials: ";
+    allDoneEnterInitials.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
+//     allDoneEnterInitials.style.float = "left";
+//     allDoneEnterInitials.style.width = "30%"
+//   //  allDoneEnterInitials.style.height = "100px";
+    enterInitialsdiv.appendChild(allDoneEnterInitials);
+
+    var enterInitialsInput = document.createElement("INPUT");
+    enterInitialsInput.setAttribute("type", "text");
+//     enterInitialsInput.style.float = "left";
+//     enterInitialsInput.style.width = "35%"
+//    // enterInitialsInput.style.height = "30px";
+    enterInitialsdiv.appendChild(enterInitialsInput);
+    
+    var submitButton = document.createElement("BUTTON");
+    var submit = document.createTextNode("Submit");
+    submitButton.appendChild(submit);
+    submitButton.setAttribute("style", "cursor: pointer");
+    submitButton.style.backgroundColor = "navy";
+    submitButton.style.padding = "5px 32px";
+    submitButton.style.borderRadius = "8px";
+    submitButton.style.color = "white";
+    submitButton.style.textAlign = "center";
+    submitButton.style.fontSize = "16px";
+    submitButton.style.margin= "4px 2px"; 
+    // submitButton.style.float = "right";
+    // submitButton.style.width = "25%"
+    // //submitButton.style.height = "50px";
+    enterInitialsdiv.appendChild(submitButton);
+    clickSubmit(submitButton, );
+  
 }
 
+var clickSubmit = function(element ){
+    element.addEventListener("click", finalHighScores);
+}
+
+var clearcurrentPage = function() {
+    body.innerHTML = "";
+    console.log("allclear");
+}
+
+var finalHighScores = function() {
+
+    console.log("entered final page!!")
+
+   
+
+
+}
 
 
