@@ -1,12 +1,15 @@
-//Query for Start-quiz button
+// Global variables
 var startQuizBtn = document.querySelector("#start-quiz-btn");
 var main = document.querySelector("#main-content");
+var codingQuizChallengediv = document.getElementById("Coding-Quiz-Challenge-info");
 var questionHeader = document.querySelector("#questionHeader");
-var answerChoices = document.querySelector("#answerChoices");
-var correctAnswer = document.querySelector("#correctAnswer");
+var answerChoicesOl = document.querySelector("#answerChoices-ol");
+var correctAnswerdiv = document.querySelector("#correctAnswer-div");
+var quizQuestionsdiv = document.querySelector("#quizQuestions-div");
 
 var timer = 75;
 var counter = 0;
+var que_Index = 0;
 
 // The array of questions for the quiz.
 const myQuestions = [
@@ -18,7 +21,7 @@ const myQuestions = [
         3: "alerts",
         4: "numbers"
       },
-      correctAnswer: "alerts"
+      correctAnswer: "3"
     },
     {
       question: "A very useful tool used during development and debugging for printing content to the debugger is?",
@@ -28,7 +31,7 @@ const myQuestions = [
         3: "forloops",
         4: "console.log"
       },
-      correctAnswer: "console.log"
+      correctAnswer: "4"
     },
     {
       question: "Array in JavaScript can be used to store?",
@@ -38,7 +41,7 @@ const myQuestions = [
         3: "other arrays",
         4: "all of the above"
       },
-      correctAnswer: "all of the above"
+      correctAnswer: "4"
     },
     {
         question: "String values must be encloded within ____ when being assigned to variables.",
@@ -48,78 +51,85 @@ const myQuestions = [
           3: "quotes",
           4: "paranthesis"
         },
-        correctAnswer: "quotes"
+        correctAnswer: "3"
       }
   ];
 
-  // Remove parent element
-  var removeParent = function()
+
+
+  // Clear the CodingQuizChallenge Info page - Helper code to call the startQuiz()
+var removeCodingChallengeInfoPage = function(){
+    main.removeChild(codingQuizChallengediv);
+    startQuiz();
+  }
+
+ // Begin the quiz! Good luck!
+  var startQuiz = function()
 { 
-    var parent = document.getElementById("main-content");
-    //console.log(parent);
-    var child = document.getElementById("Coding-Quiz-Challenge-info");
-   // console.log(child);
-    parent.removeChild(child);
-    loadQuestion1();
+    if (que_Index < myQuestions.length){
+       // console.log("len" +myQuestions.length);
+        loadQuestionandAnswer();
+    }
+    else {
+        quizQuestionsdiv.innerHTML="";
+        allDone();
+    }
 } ;
 
-
-// Place all Questions on html page
-var loadQuestions = function()
+// Load question and answer 
+var loadQuestionandAnswer =function()
 {
-    for (var i = 0; i < myQuestions.length; i++) {  
-        var question = document.createElement("h2");
-        question.textContent = myQuestions[i].question;
-        question.setAttribute('style', 'margin:auto; width:50%; text-align:center;');
-        main.appendChild(question);
-        
-        for ( var j = 0;j <=4; j++){
-            var answers = document.createElement("li");
-            answers.textContent = myQuestions[i].answers[j];
-            answers.setAttribute('style', 'margin:auto; width:50%; text-align:center;');
-            main.appendChild(answers);
-        }
-        }
-}
-
-
-// Load question 1 
-var loadQuestion1 =function()
-{
+    answerChoicesOl.innerHTML="";
+    var currentQuestionObj = myQuestions[que_Index];
+    var currentQuestion = currentQuestionObj.question;
     //question
-    var question = document.createElement("h2");
-    question.textContent = myQuestions[0].question;
-    question.setAttribute('style', 'margin:auto; width:50%; text-align:left;');
-    questionHeader.appendChild(question);
+    questionHeader.textContent = currentQuestion;
+    questionHeader.setAttribute('style', 'margin:auto; width:50%; text-align:left;');
     //answers
-    for ( var j = 1; j<=4; j++){
-        var answers = document.createElement("li");
-        answers.textContent = myQuestions[0].answers[j];
-        answers.setAttribute('style', 'margin:auto; width: 20%; text-align:left;');
-        answers.id = myQuestions[0].answers[j];
-        var show_rightORWrong = document.createElement("h2");
-        show_rightORWrong.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
-        answers.addEventListener("click", function(event){
-            if (event.target.id ===  myQuestions[0].correctAnswer)
-            {   
-                show_rightORWrong.textContent = "Correct";
-                correctAnswer.appendChild(show_rightORWrong);
-            }else
-            {
-                show_rightORWrong.textContent = "Wrong!!";
-                timer = timer-10
-            };
-        }
-    )
-        answerChoices.appendChild(answers);
-    }
-
+    currentQuestion_answerChoiceslist = currentQuestionObj.answers;
+    if (currentQuestion_answerChoiceslist){
+        for (var choice in currentQuestion_answerChoiceslist)
+        {
+            var answerChoicesListItem = document.createElement("li");
+            answerChoicesListItem.textContent = currentQuestion_answerChoiceslist[choice];
+            answerChoicesListItem.setAttribute('style', 'margin:auto; width: 20%; text-align:left;');
+            answerChoicesListItem.id = choice;
+            answerChoicesListItem.addEventListener("click", function(event){
+                showAnswer(event, currentQuestionObj.correctAnswer);
+            });
+            answerChoicesOl.appendChild(answerChoicesListItem); 
+        } 
+    };
 }
+
+//Display result - answer correct or wrong
+var showAnswer = function(event, correctAnswer){
+   // console.log("Target id is " + event.target.id );
+    if (event.target.id ===  correctAnswer)
+    {   
+        correctAnswerdiv.textContent = "Correct!";
+        correctAnswerdiv.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
+    }else
+    {
+        correctAnswerdiv.textContent = "Wrong!";
+        correctAnswerdiv.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
+    }
+    que_Index++;
+   // console.log("Queindex is "+que_Index);
+    startQuiz();
+}
+
 
 
  
+
 // click the start-quiz button
-startQuizBtn.addEventListener("click", removeParent);
+startQuizBtn.addEventListener("click", removeCodingChallengeInfoPage);
+
+
+var allDone = function() {
+    console.log("Entered All Done Page!");
+}
 
 
 

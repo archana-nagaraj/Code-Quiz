@@ -4,9 +4,9 @@
   
   :root {
     --primary: white;
-    --secondary: #d9e0e0;
-    --tertiary: rgb(192, 246, 253);
-    --grey: #333;
+    --secondary: purple;
+    --tertiary: navy;
+    --pink:pink;
     font-size: 62.5%;
   }
   
@@ -43,7 +43,7 @@ header .showTime #timeText{
 }
   
 
-header .showTime #timeInSec{
+header .showTime #time{
    font-weight: bold;
    font-size: 1.8rem;
    margin-right: 20px;
@@ -66,9 +66,9 @@ header .showTime #timeInSec{
 }
 
 .button {
-    background-color:purple;
+    background-color:var(--secondary);
     border: none;
-    color: white;
+    color: var(--primary);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -101,7 +101,7 @@ ol {
 
 ol li {
     list-style-type: decimal;
-    background: purple;
+    background: var(--tertiary);
     border: 1px solid #84c5fe;
     color: var(--primary);
     border-radius: 8px;
@@ -117,8 +117,8 @@ ol li {
 }
 
 ol li:hover {
-    color: white;
-    background: pink;
+    color: var(--primary);
+    background: var(--pink);
     border: 1px solid blue;
 }
 

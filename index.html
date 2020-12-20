@@ -9,12 +9,12 @@
 <body>
     <header>
             <div class= "View-High-Scores">
-                <a style="text-decoration:none; "rel= "View-high-scores" href="/">View-high-scores</a>
+                <a style="text-decoration:none; "rel= "View-high-scores" href="/">View high scores</a>
             </div>  
             <div class= "showTime">
                 <div>
                     <div id="timeText">Time:</div>
-                    <div id="timeInSec">75</div>
+                    <div id="time">75</div>
                 </div> 
             </div>
         </header>
@@ -24,12 +24,13 @@
                 <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
                 <button class="button" id="start-quiz-btn">Start Quiz</button>
             </div>
-            <div class="beginQuiz" id= "quizQuestions" >
+            <div class="beginQuiz" id= "quizQuestions-div" >
                 <h1 id="questionHeader" class="questionHeader1"></h1>
             <div>
-                <ol id= "answerChoices" type="1"></ol>
+                <ol id= "answerChoices-ol" type="1"></ol>
             </div>
-              <div id = "correctAnswer"></div>  
+              <div id = "correctAnswer-div">
+              </div>  
             </div>
         </main>   
     <script src="./assets/js/script.js"></script> 
