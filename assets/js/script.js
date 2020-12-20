@@ -1,4 +1,5 @@
 // Global variables
+var body = document.body;
 var startQuizBtn = document.querySelector("#start-quiz-btn");
 var main = document.querySelector("#main-content");
 var codingQuizChallengediv = document.getElementById("Coding-Quiz-Challenge-info");
@@ -192,26 +193,68 @@ var allDone = function() {
     // submitButton.style.width = "25%"
     // //submitButton.style.height = "50px";
     enterInitialsdiv.appendChild(submitButton);
-    clickSubmit(submitButton, );
-  
+    clickSubmit(submitButton);
+    
 }
 
 var clickSubmit = function(element ){
     element.addEventListener("click", finalHighScores);
-}
-
-var clearcurrentPage = function() {
-    body.innerHTML = "";
-    console.log("allclear");
+    
 }
 
 var finalHighScores = function() {
-
+    body.innerHTML = "";
     console.log("entered final page!!")
+    var highScoresdiv = document.createElement("div");
+    highScoresdiv.setAttribute('style', 'text-align: center, margin-bottom: 20px, position: absolute, top: 40%, left: 50%;');
+    highScoresdiv.style.position = "absolute";
+    highScoresdiv.style.top = "30%";
+    highScoresdiv.style.left = "30%";
+    console.log(highScoresdiv);
+    console.log(body);
+    body.appendChild(highScoresdiv);
 
+    var highScoresh1 = document.createElement("h1");
+    highScoresh1.textContent = "High Scores";
+    highScoresdiv.appendChild(highScoresh1);
+
+    var showScores = document.createElement("li");
+    showScores.textContent = timer;
+    showScores.style.background = "skyblue";
+    showScores.style.fontSize = "20px";
+    showScores.style.padding = "10px";
+    showScores.style.margin = "10px";
+    showScores.style.listStyleType = "decimal";
+    highScoresdiv.appendChild(showScores);
+
+    var goBackButton = document.createElement("BUTTON");
+    var goBack = document.createTextNode("Go Back");
+    goBackButton.appendChild(goBack);
+    goBackButton.setAttribute("style", "cursor: pointer");
+    goBackButton.style.backgroundColor = "navy";
+    goBackButton.style.padding = "5px 32px";
+    goBackButton.style.borderRadius = "8px";
+    goBackButton.style.color = "white";
+    goBackButton.style.textAlign = "center";
+    goBackButton.style.fontSize = "16px";
+    goBackButton.style.margin= "4px 2px"; 
+
+    highScoresdiv.appendChild(goBackButton);
+
+    var clearHighScoresButton = document.createElement("BUTTON");
+    var clearHighScores = document.createTextNode("Clear high scores");
+    clearHighScoresButton.appendChild(clearHighScores);
+    clearHighScoresButton.setAttribute("style", "cursor: pointer");
+    clearHighScoresButton.style.backgroundColor = "navy";
+    clearHighScoresButton.style.padding = "5px 32px";
+    clearHighScoresButton.style.borderRadius = "8px";
+    clearHighScoresButton.style.color = "white";
+    clearHighScoresButton.style.textAlign = "center";
+    clearHighScoresButton.style.fontSize = "16px";
+    clearHighScoresButton.style.margin= "4px 2px"; 
+
+    highScoresdiv.appendChild(clearHighScoresButton);
    
-
-
 }
 
 
