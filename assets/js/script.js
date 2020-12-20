@@ -7,10 +7,10 @@ var questionHeader = document.querySelector("#questionHeader");
 var answerChoicesOl = document.querySelector("#answerChoices-ol");
 var correctAnswerdiv = document.querySelector("#correctAnswer-div");
 var quizQuestionsdiv = document.querySelector("#quizQuestions-div");
-var time = document.querySelector("#time");
+var timerEl = document.querySelector("#time");
 
-var timer = 75;
-var counter = 0;
+
+var timeLeft = 75;
 var que_Index = 0;
 
 // The array of questions for the quiz.
@@ -57,10 +57,9 @@ const myQuestions = [
       }
   ];
 
-
-
   // Clear the CodingQuizChallenge Info page - Helper code to call the startQuiz()
 var removeCodingChallengeInfoPage = function(){
+    countdown();
     main.removeChild(codingQuizChallengediv);
     startQuiz();
   }
@@ -68,8 +67,7 @@ var removeCodingChallengeInfoPage = function(){
  // Begin the quiz! Good luck!
   var startQuiz = function()
 { 
-    if (que_Index < myQuestions.length){
-       // console.log("len" +myQuestions.length);
+    if (que_Index < myQuestions.length && timeLeft > 0){
         loadQuestionandAnswer();
     }
     else {
@@ -77,6 +75,24 @@ var removeCodingChallengeInfoPage = function(){
         allDone();
     }
 } ;
+
+var countdown = function(){
+    var timeInterval = setInterval(function() {
+        // As long as the `timeLeft` is greater than 1
+        if (timeLeft > 1) {
+          // Set the `textContent` of `timeEl` to show the remaining seconds
+          timerEl.textContent = timeLeft;
+          // Decrement `timeEl` by 1
+          timeLeft--;
+        } else {
+          // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+          timerEl.textContent = '';
+          // Use `clearInterval()` to stop the timer
+          clearInterval(timeInterval);
+          // Call the `displayMessage()` function
+        }
+      }, 1000);
+    }
 
 // Load question and answer 
 var loadQuestionandAnswer =function()
@@ -106,7 +122,6 @@ var loadQuestionandAnswer =function()
 
 //Display result - answer correct or wrong
 var showAnswer = function(event, correctAnswer){
-   // console.log("Target id is " + event.target.id );
     if (event.target.id ===  correctAnswer)
     {   
         correctAnswerdiv.textContent = "Correct!";
@@ -115,18 +130,16 @@ var showAnswer = function(event, correctAnswer){
     {
         correctAnswerdiv.textContent = "Wrong!";
         correctAnswerdiv.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
-        timer = timer - 10;
-        updateTimer(timer);
+        timeLeft-=10;
+        updateTimer(timeLeft);
     }
     que_Index++;
-   // console.log("Queindex is "+que_Index);
     startQuiz();
 }
 
 // Update Timer for every wrong answer
-var updateTimer = function(timer){
-    time.textContent = timer;
-
+var updateTimer = function(x){
+    timerEl.textContent = x;
 }
  
 
@@ -137,7 +150,6 @@ startQuizBtn.addEventListener("click", removeCodingChallengeInfoPage);
 
 // All Done Page loaded with DOM methods
 var allDone = function() {
-    console.log("Entered All Done Page!");
     var allDonediv = document.createElement("div");
     allDonediv.setAttribute('style', 'text-align: center, margin-bottom: 20px, position: absolute, top: 40%, left: 50%;');
     allDonediv.style.position = "absolute";
@@ -152,7 +164,7 @@ var allDone = function() {
     allDonediv.appendChild(allDoneh1);
 
     var allDoneFinalScore = document.createElement("h2");
-    allDoneFinalScore.textContent = "Your final score is: " +timer + ".";
+    allDoneFinalScore.textContent = "Your final score is: " +timeLeft + ".";
     allDoneh1.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
     allDonediv.appendChild(allDoneFinalScore);
 
@@ -204,14 +216,11 @@ var clickSubmit = function(element ){
 
 var finalHighScores = function() {
     body.innerHTML = "";
-    console.log("entered final page!!")
     var highScoresdiv = document.createElement("div");
     highScoresdiv.setAttribute('style', 'text-align: center, margin-bottom: 20px, position: absolute, top: 40%, left: 50%;');
     highScoresdiv.style.position = "absolute";
     highScoresdiv.style.top = "30%";
     highScoresdiv.style.left = "30%";
-    console.log(highScoresdiv);
-    console.log(body);
     body.appendChild(highScoresdiv);
 
     var highScoresh1 = document.createElement("h1");
@@ -219,7 +228,7 @@ var finalHighScores = function() {
     highScoresdiv.appendChild(highScoresh1);
 
     var showScores = document.createElement("li");
-    showScores.textContent = timer;
+    showScores.textContent = timeLeft;
     showScores.style.background = "skyblue";
     showScores.style.fontSize = "20px";
     showScores.style.padding = "10px";
@@ -257,4 +266,7 @@ var finalHighScores = function() {
    
 }
 
+var clickGoBack = function(element){
+    element.addEventListener("click", )
 
+}
