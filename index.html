@@ -8,20 +8,31 @@
 </head>
 <body>
     <header>
-        <div class= "View-high-scores">
-            <h3><a style="text-decoration:none; "rel= "View-high-scores" href="/">View-high-scores</a></h3>
-            <h3 id="Time">Time: </h3>
-        </div>  
-    </header>
-    <main>
-        <div class="Coding-Quiz-Challenge">
-            <h1>Coding Quiz Challenge</h1>
-            <p>Try to answer the following code-related questions within the time limit. <br>Keep in mind that incorrect answers will penalize your score/time <br>by ten seconds!</p>
-            <button class="btn" id="start-quiz">Start Quiz</button>
-        </div>
-    </main>
-    
-
+            <div class= "View-High-Scores">
+                <a style="text-decoration:none; "rel= "View-high-scores" href="/">View-high-scores</a>
+            </div>  
+            <div class= "showTime">
+                <div>
+                    <div id="timeText">Time:</div>
+                    <div id="timeInSec">75</div>
+                </div> 
+            </div>
+        </header>
+        <main id= "main-content">
+            <div id="Coding-Quiz-Challenge-info">
+                <h1 id="infoTitle">Coding Quiz Challenge</h1>
+                <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+                <button class="button" id="start-quiz-btn">Start Quiz</button>
+            </div>
+            <div class="beginQuiz" id= "quizQuestions" >
+                <h1 id="questionHeader" class="questionHeader1"></h1>
+            <div>
+                <ol id= "answerChoices" type="1"></ol>
+            </div>
+              <div id = "correctAnswer"></div>  
+            </div>
+        </main>   
+    <script src="./assets/js/script.js"></script> 
 </body>
 </html>
 
