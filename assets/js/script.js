@@ -1,5 +1,8 @@
-// Global variables
+// Global DOM variables
 var body = document.body;
+var header = document.querySelector("#viewScoreTimeheader");
+var viewHigh = document.querySelector(".View-High-Scores");
+var showTime = document.querySelector(".showTime");
 var startQuizBtn = document.querySelector("#start-quiz-btn");
 var main = document.querySelector("#main-content");
 var codingQuizChallengediv = document.getElementById("Coding-Quiz-Challenge-info");
@@ -9,8 +12,6 @@ var correctAnswerdiv = document.querySelector("#correctAnswer-div");
 var quizQuestionsdiv = document.querySelector("#quizQuestions-div");
 var timerEl = document.querySelector("#time");
 
-
-var timeLeft = 75;
 var que_Index = 0;
 
 // The array of questions for the quiz.
@@ -64,8 +65,18 @@ var removeCodingChallengeInfoPage = function(){
     startQuiz();
   }
 
+var appendCodingChallengeInfoPage = function(){
+    body.innerHTML = "";
+    main.innerHTML = "";
+    body.appendChild(header);
+    body.appendChild(main);
+    main.appendChild(codingQuizChallengediv);
+    timerEl.textContent = 0;
+    que_Index = 0;
+}
+
  // Begin the quiz! Good luck!
-  var startQuiz = function()
+var startQuiz = function()
 { 
     if (que_Index < myQuestions.length && timeLeft > 0){
         loadQuestionandAnswer();
@@ -74,10 +85,11 @@ var removeCodingChallengeInfoPage = function(){
         quizQuestionsdiv.innerHTML="";
         allDone();
     }
-} ;
+};
 
+// Start the timer
 var countdown = function(){
-    timerLeft = 75;
+    timeLeft = 75;
     timerEl.textContent = timeLeft;
     var timeInterval = setInterval(function() {
         if ((timeLeft > 1) && (que_Index < 4))
@@ -94,6 +106,7 @@ var countdown = function(){
 // Load question and answer 
 var loadQuestionandAnswer =function()
 {
+    main.appendChild(quizQuestionsdiv);
     answerChoicesOl.innerHTML="";
     var currentQuestionObj = myQuestions[que_Index];
     var currentQuestion = currentQuestionObj.question;
@@ -134,7 +147,6 @@ var showAnswer = function(event, correctAnswer){
     startQuiz();
 }
 
-
 // click the start-quiz button
 startQuizBtn.addEventListener("click", removeCodingChallengeInfoPage);
 
@@ -171,15 +183,6 @@ var allDone = function() {
     allDoneEnterInitials.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
     enterInitialsdiv.appendChild(allDoneEnterInitials);
 
-    // var initialsInputForm = document.createElement("form");
-    // enterInitialsdiv.appendChild(initialsInputForm);
-
-    // var formdiv = document.createElement("div");
-    // initialsInputForm.appendChild(formdiv);
-
-    // var labelInitials = document.createElement("Label");
-    // initialsInputForm.appendChild(labelInitials);
-
     var enterInitialsInput = document.createElement("INPUT");
     enterInitialsInput.setAttribute("type", "text");
     enterInitialsdiv.appendChild(enterInitialsInput);
@@ -198,7 +201,6 @@ var allDone = function() {
     enterInitialsdiv.appendChild(submitButton);
     clickSubmit(submitButton);
 }
-
 
 // Function to click Submit button in the All Done page
 var clickSubmit = function(element ){
@@ -255,11 +257,11 @@ var finalHighScores = function() {
     clearHighScoresButton.style.margin= "4px 2px"; 
 
     highScoresdiv.appendChild(clearHighScoresButton);
-   
+
+    clickGoBack(goBackButton);
 }
 
 // Function to take back to the original page - Click Goback button
 var clickGoBack = function(element){
-    element.addEventListener("click", )
-
+    element.addEventListener("click", appendCodingChallengeInfoPage);
 }

@@ -7,7 +7,7 @@
     <title>Code-Quiz</title>
 </head>
 <body>
-    <header>
+    <header id= "viewScoreTimeheader">
             <div class= "View-High-Scores">
                 <a style="text-decoration:none; "rel= "View-high-scores" href="/">View high scores</a>
             </div>  
@@ -17,32 +17,22 @@
                     <div id="time">0</div>
                 </div> 
             </div>
-        </header>
-        <main id= "main-content">
-            <div id="Coding-Quiz-Challenge-info">
-                <h1 id="infoTitle">Coding Quiz Challenge</h1>
-                <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-                <button class="button" id="start-quiz-btn">Start Quiz</button>
-            </div>
-            <div class="beginQuiz" id= "quizQuestions-div" >
-                <h1 id="questionHeader" class="questionHeader1"></h1>
-            <div>
-                <ol id= "answerChoices-ol" type="1"></ol>
-            </div>
-              <div id = "correctAnswer-div">
-              </div>  
-            </div>
-            <!-- <div class="initials-input-form">
-                <p></p>
-                <form id="initials-form">
-                    <div class="form-group">
-                        <label for="initials">Enter Initials</label>
-                        <input id="initials">
-                        <button class="btn" id="submit-form-btn" type="button">Submit</button>
-                    </div>
-                </form>
-            </div> -->
-        </main>   
+    </header>
+    <main id= "main-content">
+        <div id="Coding-Quiz-Challenge-info">
+            <h1 id="infoTitle">Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <button class="button" id="start-quiz-btn">Start Quiz</button>
+        </div>
+        <div class="beginQuiz" id= "quizQuestions-div" >
+            <h1 id="questionHeader" class="questionHeader1"></h1>
+        <div>
+            <ol id= "answerChoices-ol" type="1"></ol>
+        </div>
+            <div id = "correctAnswer-div">
+            </div>  
+        </div>
+    </main>   
     <script src="./assets/js/script.js"></script> 
 </body>
 </html>
