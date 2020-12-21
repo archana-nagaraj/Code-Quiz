@@ -77,19 +77,16 @@ var removeCodingChallengeInfoPage = function(){
 } ;
 
 var countdown = function(){
+    timerLeft = 75;
+    timerEl.textContent = timeLeft;
     var timeInterval = setInterval(function() {
-        // As long as the `timeLeft` is greater than 1
-        if (timeLeft > 1) {
-          // Set the `textContent` of `timeEl` to show the remaining seconds
-          timerEl.textContent = timeLeft;
-          // Decrement `timeEl` by 1
+        if ((timeLeft > 1) && (que_Index < 4))
+        { 
+        timerEl.textContent = timeLeft;
           timeLeft--;
         } else {
-          // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-          timerEl.textContent = '';
-          // Use `clearInterval()` to stop the timer
+        //   Use `clearInterval()` to stop the timer
           clearInterval(timeInterval);
-          // Call the `displayMessage()` function
         }
       }, 1000);
     }
@@ -131,24 +128,18 @@ var showAnswer = function(event, correctAnswer){
         correctAnswerdiv.textContent = "Wrong!";
         correctAnswerdiv.setAttribute('style', 'text-align: Center; margin-bottom: 20px, font-style: italic, font-size: 2.8rem;');
         timeLeft-=10;
-        updateTimer(timeLeft);
+        timerEl.textContent = timeLeft;
     }
     que_Index++;
     startQuiz();
 }
 
-// Update Timer for every wrong answer
-var updateTimer = function(x){
-    timerEl.textContent = x;
-}
- 
 
 // click the start-quiz button
 startQuizBtn.addEventListener("click", removeCodingChallengeInfoPage);
 
 
-
-// All Done Page loaded with DOM methods
+// All Done Page loaded dynamically using DOM methods
 var allDone = function() {
     var allDonediv = document.createElement("div");
     allDonediv.setAttribute('style', 'text-align: center, margin-bottom: 20px, position: absolute, top: 40%, left: 50%;');
@@ -178,16 +169,19 @@ var allDone = function() {
     var allDoneEnterInitials = document.createElement("h2");
     allDoneEnterInitials.textContent = "Enter Initials: ";
     allDoneEnterInitials.setAttribute('style', 'text-align: left; margin-bottom: 20px;');
-//     allDoneEnterInitials.style.float = "left";
-//     allDoneEnterInitials.style.width = "30%"
-//   //  allDoneEnterInitials.style.height = "100px";
     enterInitialsdiv.appendChild(allDoneEnterInitials);
+
+    // var initialsInputForm = document.createElement("form");
+    // enterInitialsdiv.appendChild(initialsInputForm);
+
+    // var formdiv = document.createElement("div");
+    // initialsInputForm.appendChild(formdiv);
+
+    // var labelInitials = document.createElement("Label");
+    // initialsInputForm.appendChild(labelInitials);
 
     var enterInitialsInput = document.createElement("INPUT");
     enterInitialsInput.setAttribute("type", "text");
-//     enterInitialsInput.style.float = "left";
-//     enterInitialsInput.style.width = "35%"
-//    // enterInitialsInput.style.height = "30px";
     enterInitialsdiv.appendChild(enterInitialsInput);
     
     var submitButton = document.createElement("BUTTON");
@@ -201,19 +195,17 @@ var allDone = function() {
     submitButton.style.textAlign = "center";
     submitButton.style.fontSize = "16px";
     submitButton.style.margin= "4px 2px"; 
-    // submitButton.style.float = "right";
-    // submitButton.style.width = "25%"
-    // //submitButton.style.height = "50px";
     enterInitialsdiv.appendChild(submitButton);
     clickSubmit(submitButton);
-    
 }
 
+
+// Function to click Submit button in the All Done page
 var clickSubmit = function(element ){
     element.addEventListener("click", finalHighScores);
-    
 }
 
+//Function to build FibalHighScores page using DOM methods
 var finalHighScores = function() {
     body.innerHTML = "";
     var highScoresdiv = document.createElement("div");
@@ -228,7 +220,7 @@ var finalHighScores = function() {
     highScoresdiv.appendChild(highScoresh1);
 
     var showScores = document.createElement("li");
-    showScores.textContent = timeLeft;
+    showScores.textContent = timerEl.textContent;
     showScores.style.background = "skyblue";
     showScores.style.fontSize = "20px";
     showScores.style.padding = "10px";
@@ -266,6 +258,7 @@ var finalHighScores = function() {
    
 }
 
+// Function to take back to the original page - Click Goback button
 var clickGoBack = function(element){
     element.addEventListener("click", )
 
